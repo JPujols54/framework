@@ -1,13 +1,19 @@
 from pathlib import Path
-from http import HTTPRequest, HTTPResponse
+from .http import HTTPRequest, HTTPResponse
 
 class Router:
     def __init__(self,static_dir: str = "static"):
         self.routes = {}
         self.static_dir = Path(static_dir)
 
-    def add_route(self, method: str, path: str, handler):
-        self.routes[(method.upper(), path)] = handler
+    def add_route(self, method: str, path: str, handler=None):
+        def register(fn):
+            self.routes[(method.upper(), path)] = fn
+            return fn
+
+        if handler is None:
+            return register
+        return register(handler)
 
     def handle_request(self, request: HTTPRequest) -> HTTPResponse:
         handler = self.routes.get((request.method.upper(), request.path))

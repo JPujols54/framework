@@ -1,7 +1,7 @@
 import socket
 from concurrent.futures import ThreadPoolExecutor
-from http import HTTPRequest, HTTPResponse
-from router import Router
+from .http import HTTPRequest, HTTPResponse
+from .router import Router
 
 class HTTPServer:
     def __init__(self, max_workers: int = 20):
@@ -9,12 +9,6 @@ class HTTPServer:
         self.port = None
         self.router = Router()
         self.executor = ThreadPoolExecutor(max_workers=max_workers)
-
-    def router(self, path: str, method: str = "GET"):
-        def decorator(handler):
-            self.route.add_route(method, path, handler)
-            return handler
-        return decorator
 
     def _process_client(self, client_socket: socket.socket, client_address):
         try:
@@ -34,7 +28,8 @@ class HTTPServer:
             client_socket.close()
 
     def start(self, host: str = "127.0.0.1", port: int = 8080): 
-
+        self.host = host
+        self.port = port
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server_socket:
             server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
             server_socket.bind((self.host, self.port))
