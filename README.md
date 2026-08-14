@@ -192,6 +192,95 @@ Decoradores personalizados:
 
 ---
 
+# 📜 LA TRINIDAD DE LA ARQUITECTURA LIMPIA
+
+## 1. FLUENT INTERFACE (El Superpoder de `return self`)
+**Objetivo:** Eliminar variables temporales y permitir el encadenamiento de métodos (`.metodo1().metodo2()`) configurando un objeto como si tuviera perillas.
+
+```python
+class ConfiguradorServidor:
+    def __init__(self, ip):
+        self.ip = ip
+        self.puerto = 8080
+        self.protocolo = "http"
+
+    def en_puerto(self, puerto):
+        self.puerto = puerto
+        return self  # <-- Pasa la batuta del objeto modificado
+
+    def usar_https(self):
+        self.protocolo = "https"
+        return self  # <-- Permite seguir encadenando
+
+    def iniciar(self):
+        # Método TERMINAL: Rompe la cadena y ejecuta la acción final
+        return f"🚀 Servidor corriendo en {self.protocolo}://{self.ip}:{self.puerto}"
+
+# ⚡ USO REAL (En una sola línea estética)
+servidor = ConfiguradorServidor("127.0.0.1").en_puerto(443).usar_https().iniciar()
+```
+
+---
+
+## 2. PATRÓN FACTORY (El Asesino de los `if/else` Anidados)
+**Objetivo:** Centralizar la creación de objetos dinámicamente usando búsquedas Hash (O(1)) en un diccionario, en lugar de condicionales lentas y feas.
+
+```python
+# Requisito: Todas las clases deben tener el mismo método (.procesar)
+class ProcesadorTXT:
+    def procesar(self, datos): return f"Texto: {datos}"
+
+class ProcesadorJSON:
+    def procesar(self, datos): return f"JSON: {datos}"
+
+class ProcesadorFactory:
+    # Guardamos las CLASES (las plantillas) como valores en el diccionario
+    _MAPEO = {
+        "txt": ProcesadorTXT,
+        "json": ProcesadorJSON
+    }
+
+    @classmethod
+    def obtener(cls, extension):
+        clase_encontrada = cls._MAPEO.get(extension.lower())
+        if not clase_encontrada:
+            raise ValueError("Formato inválido")
+        return clase_encontrada()  # <-- Instanciación "Lazy" (Bahu demanda)
+
+# ⚡ USO REAL (El código principal es ciego a los tipos de archivo)
+procesador = ProcesadorFactory.obtener("json")
+resultado = procesador.procesar("{'id': 1}")
+```
+
+---
+
+## 3. PATRÓN DECORATOR (El Donador de Superpoderes)
+**Objetivo:** Añadir funciones extras (encriptar, medir tiempo, logs) a un objeto existente envolviéndolo como una cebolla, sin tocar su código original.
+
+```python
+class ProcesadorBase:
+    def procesar(self, datos):
+        return f"Datos({datos})"
+
+class DecoradorEncriptar:
+    def __init__(self, objeto_original):
+        self.objeto = objeto_original  # Envolvemos el objeto previo
+
+    def procesar(self, datos):
+        # 1. Ejecuta lo que ya hacía el objeto de adentro
+        resultado_interno = self.objeto.procesar(datos)
+        # 2. Le inyecta el nuevo superpoder
+        return f"🔒 ENCRIPTADO[{resultado_interno}]"
+
+# ⚡ USO REAL (Construcción modular tipo fichas de LEGO)
+herramienta_base = ProcesadorBase()
+herramienta_segura = DecoradorEncriptar(herramienta_base)
+
+# Rompe las capas de afuera hacia adentro de forma automática
+print(herramienta_segura.procesar("hola")) 
+# Salida: 🔒 ENCRIPTADO[Datos(hola)]
+```
+
 # 🌐 Módulo 2 - Fundamentos de Redes
 
 Antes de escribir una sola línea del servidor es importante comprender cómo funcionan las redes.
