@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto | Mi Sitio Web</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="navbar">
+    <div class="logo">Mi<span>Sitio</span></div>
+    <ul class="nav-links">
+      <li><a href="/">Inicio</a></li>
+      <li><a href="/#features">Servicios</a></li>
+      <li><a href="/contacto.html">Contacto</a></li>
+    </ul>
+    <a href="/contacto.html" class="btn btn-nav">Empezar</a>
+  </nav>
+
+  <!-- Hero / Encabezado de la página de contacto -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="badge">Contacto</span>
+      <h1>Hablemos de tu próximo proyecto</h1>
+      <p>Estamos listos para escucharte. Envíanos un mensaje y te responderemos a la brevedad posible.</p>
+    </div>
+
+    <!-- Visual Card Glassmorphism -->
+    <div class="hero-visual">
+      <div class="glass-card">
+        <div class="circle"></div>
+        <div class="line long"></div>
+        <div class="line short"></div>
+        <div class="line long"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de Formulario de Contacto e Información -->
+  <section class="features">
+    <div class="grid-features">
+      
+      <!-- Tarjeta de Información de Contacto -->
+      <div class="card">
+        <div class="icon">📍</div>
+        <h3>Nuestra Oficina</h3>
+        <p>Av. Principal 123, Oficina 4B<br>Ciudad de México, México</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">✉️</div>
+        <h3>Correo Electrónico</h3>
+        <p>soporte@misitio.com<br>contacto@misitio.com</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">📞</div>
+        <h3>Teléfono</h3>
+        <p>+52 (55) 1234-5678<br>Lunes a Viernes (9:00 - 18:00)</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Sección con Formulario de Envío Principal (CTA Style) -->
+  <section class="cta">
+    <div class="cta-card">
+      <h2>Envíale un mensaje a nuestro equipo</h2>
+      <p>Llena este formulario y nos pondremos en contacto contigo hoy mismo.</p>
+
+      <form class="cta-form" id="contactForm" action="/api/contacto" method="POST">
+        <input type="text" name="nombre" placeholder="Tu nombre" required>
+        <input type="email" name="email" placeholder="Tu correo electrónico" required>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 MiSitio. Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
