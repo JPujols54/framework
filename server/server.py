@@ -31,13 +31,42 @@ class HTTPServer:
             server.close()
             self.executor.shutdown(wait=True)
 
+    def _read_full_request(self, client_socket: socket.socket) -> bytes:
+        """Lee repetidamente del socket hasta recibir la petición HTTP completa."""
+        data = b""
+
+        while b"\r\n\r\n" not in data:
+            chunk = client_socket.recv(4096)
+            if not chunk:
+                return data
+            data += chunk
+
+        headers_part, body_part = data.split(b"\r\n\r\n", 1)
+        content_length = 0
+
+        for line in headers_part.split(b"\r\n"):
+            if line.lower().startswith(b"content-length:"):
+                try:
+                    content_length = int(line.split(b":")[1].strip())
+                except ValueError:
+                    pass
+                break
+
+        while len(body_part) < content_length:
+            chunk = client_socket.recv(4096)
+            if not chunk:
+                break
+            body_part += chunk
+
+        return headers_part + b"\r\n\r\n" + body_part
+
     def _process_client(self, client_socket: socket.socket, client_address: tuple):
         client_socket.settimeout(self.timeout)
         requests_count = 0
 
         try:
             while requests_count < self.max_requests:
-                raw_data = client_socket.recv(4096)
+                raw_data = self._read_full_request(client_socket)
                 if not raw_data:
                     break
 

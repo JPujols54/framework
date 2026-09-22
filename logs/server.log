@@ -61,3 +61,43 @@
 2026-09-22 17:59:57 [ERROR] [HTTP_SERVER]: Error procesando cliente ('127.0.0.1', 45930): La ruta '/favicon.ico' no fue encontrada
 2026-09-22 17:59:57 [ERROR] [HTTP_SERVER]: Error procesando cliente ('127.0.0.1', 45932): La ruta '/favicon.ico' no fue encontrada
 2026-09-22 18:00:03 [INFO] [HTTP_SERVER]: 127.0.0.1 - 'POST /api/login' 200 OK (0.33ms)
+2026-09-22 18:21:52 [INFO] [HTTP_SERVER]: 127.0.0.1 - 'GET /' 200 OK (0.62ms)
+2026-09-22 18:21:52 [INFO] [HTTP_SERVER]: 127.0.0.1 - 'GET /style.css' 200 OK (0.35ms)
+2026-09-22 18:21:52 [INFO] [HTTP_SERVER]: 127.0.0.1 - 'GET /script.js' 200 OK (0.28ms)
+2026-09-22 18:21:53 [ERROR] [HTTP_SERVER]: Error procesando cliente ('127.0.0.1', 46738): La ruta '/favicon.ico' no fue encontrada
+2026-09-22 18:21:53 [ERROR] [HTTP_SERVER]: Error procesando cliente ('127.0.0.1', 46748): La ruta '/favicon.ico' no fue encontrada
+2026-09-22 18:21:53 [ERROR] [HTTP_SERVER]: Error procesando cliente ('127.0.0.1', 46762): La ruta '/favicon.ico' no fue encontrada
+2026-09-22 18:21:53 [ERROR] [HTTP_SERVER]: Error procesando cliente ('127.0.0.1', 46766): La ruta '/favicon.ico' no fue encontrada
+2026-09-22 18:21:53 [ERROR] [HTTP_SERVER]: Error procesando cliente ('127.0.0.1', 46772): La ruta '/favicon.ico' no fue encontrada
+2026-09-22 18:21:53 [ERROR] [HTTP_SERVER]: Error procesando cliente ('127.0.0.1', 46776): La ruta '/favicon.ico' no fue encontrada
+2026-09-22 18:21:53 [ERROR] [HTTP_SERVER]: Error procesando cliente ('127.0.0.1', 46786): La ruta '/favicon.ico' no fue encontrada
+2026-09-22 18:21:53 [ERROR] [HTTP_SERVER]: Error procesando cliente ('127.0.0.1', 46796): La ruta '/favicon.ico' no fue encontrada
+2026-09-22 18:21:53 [ERROR] [HTTP_SERVER]: Error procesando cliente ('127.0.0.1', 46812): La ruta '/favicon.ico' no fue encontrada
+2026-09-22 18:21:53 [ERROR] [HTTP_SERVER]: Error procesando cliente ('127.0.0.1', 46816): La ruta '/favicon.ico' no fue encontrada
+2026-09-22 18:21:56 [INFO] [HTTP_SERVER]: 127.0.0.1 - 'GET /upload' 200 OK (0.61ms)
+2026-09-22 18:21:56 [ERROR] [HTTP_SERVER]: Error procesando cliente ('127.0.0.1', 42210): La ruta '/favicon.ico' no fue encontrada
+2026-09-22 18:21:56 [ERROR] [HTTP_SERVER]: Error procesando cliente ('127.0.0.1', 42226): La ruta '/favicon.ico' no fue encontrada
+2026-09-22 18:21:56 [ERROR] [HTTP_SERVER]: Error procesando cliente ('127.0.0.1', 42238): La ruta '/favicon.ico' no fue encontrada
+2026-09-22 18:21:56 [ERROR] [HTTP_SERVER]: Error procesando cliente ('127.0.0.1', 42240): La ruta '/favicon.ico' no fue encontrada
+2026-09-22 18:21:56 [ERROR] [HTTP_SERVER]: Error procesando cliente ('127.0.0.1', 42244): La ruta '/favicon.ico' no fue encontrada
+2026-09-22 18:21:56 [ERROR] [HTTP_SERVER]: Error procesando cliente ('127.0.0.1', 42250): La ruta '/favicon.ico' no fue encontrada
+2026-09-22 18:21:56 [ERROR] [HTTP_SERVER]: Error procesando cliente ('127.0.0.1', 42266): La ruta '/favicon.ico' no fue encontrada
+2026-09-22 18:21:56 [ERROR] [HTTP_SERVER]: Error procesando cliente ('127.0.0.1', 42268): La ruta '/favicon.ico' no fue encontrada
+2026-09-22 18:21:56 [ERROR] [HTTP_SERVER]: Error procesando cliente ('127.0.0.1', 42280): La ruta '/favicon.ico' no fue encontrada
+2026-09-22 18:21:56 [ERROR] [HTTP_SERVER]: Error procesando cliente ('127.0.0.1', 42292): La ruta '/favicon.ico' no fue encontrada
+2026-09-22 18:22:06 [ERROR] [HTTP_SERVER]: Error procesando cliente ('127.0.0.1', 42294): memoryview: a bytes-like object is required, not 'dict'
+2026-09-22 18:22:06 [ERROR] [HTTP_SERVER]: Error procesando cliente ('127.0.0.1', 40978): memoryview: a bytes-like object is required, not 'dict'
+2026-09-22 18:23:49 [INFO] [HTTP_SERVER]: 127.0.0.1 - 'GET /upload' 200 OK (0.97ms)
+2026-09-22 18:23:49 [ERROR] [HTTP_SERVER]: Error procesando cliente ('127.0.0.1', 45736): La ruta '/favicon.ico' no fue encontrada
+2026-09-22 18:23:49 [ERROR] [HTTP_SERVER]: Error procesando cliente ('127.0.0.1', 45742): La ruta '/favicon.ico' no fue encontrada
+2026-09-22 18:23:49 [ERROR] [HTTP_SERVER]: Error procesando cliente ('127.0.0.1', 45754): La ruta '/favicon.ico' no fue encontrada
+2026-09-22 18:23:49 [ERROR] [HTTP_SERVER]: Error procesando cliente ('127.0.0.1', 45756): La ruta '/favicon.ico' no fue encontrada
+2026-09-22 18:23:49 [ERROR] [HTTP_SERVER]: Error procesando cliente ('127.0.0.1', 45768): La ruta '/favicon.ico' no fue encontrada
+2026-09-22 18:23:49 [ERROR] [HTTP_SERVER]: Error procesando cliente ('127.0.0.1', 45778): La ruta '/favicon.ico' no fue encontrada
+2026-09-22 18:23:49 [ERROR] [HTTP_SERVER]: Error procesando cliente ('127.0.0.1', 45794): La ruta '/favicon.ico' no fue encontrada
+2026-09-22 18:23:49 [ERROR] [HTTP_SERVER]: Error procesando cliente ('127.0.0.1', 45808): La ruta '/favicon.ico' no fue encontrada
+2026-09-22 18:23:49 [ERROR] [HTTP_SERVER]: Error procesando cliente ('127.0.0.1', 45818): La ruta '/favicon.ico' no fue encontrada
+2026-09-22 18:23:49 [ERROR] [HTTP_SERVER]: Error procesando cliente ('127.0.0.1', 45828): La ruta '/favicon.ico' no fue encontrada
+2026-09-22 18:23:51 [ERROR] [HTTP_SERVER]: Error procesando cliente ('127.0.0.1', 45832): Sin estrategia definida para el tipo: <class 'tuple'>
+2026-09-22 18:23:51 [ERROR] [HTTP_SERVER]: Error procesando cliente ('127.0.0.1', 45848): Sin estrategia definida para el tipo: <class 'tuple'>
+2026-09-22 18:25:58 [INFO] [HTTP_SERVER]: 127.0.0.1 - 'POST /api/v1/files/upload' 200 OK (1.73ms)

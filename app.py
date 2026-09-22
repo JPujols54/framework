@@ -5,6 +5,7 @@ from core.exception import (
     UnauthorizedError
 )
 from datetime import datetime
+from pathlib import Path
 
 app = Router(static_dir="public")
 
@@ -94,6 +95,27 @@ def upload_page(request):
 @app.post("/api/v1/files/upload")
 def upload_large_file(request):
     data = request.data
+
+    if not data:
+        return {"status": "error", "message": "No data provided"}, 400
+
+    # Definir directorio y asegurarnos de que exista
+    upload_dir = Path("uploads")
+    upload_dir.mkdir(parents=True, exist_ok=True)
+
+    # Definir la ruta completa del archivo
+    file_path = upload_dir / "uploaded_file.bin"
+
+    # Escribir directamente los bytes en el archivo
+    file_path.write_bytes(data)
+
+    return {
+        "status": "success",
+        "message": "File uploaded successfully",
+        "file_path": str(file_path),
+        "bytes_written": len(data)
+    }
+    
 
 if __name__ == "__main__":
     server = HTTPServer(app_handler=app)

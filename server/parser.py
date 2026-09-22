@@ -61,12 +61,19 @@ class HTTPRequestParser:
     @staticmethod
     def _parse_body(content_type: str, body: bytes):
         base_type = content_type.split(";")[0].strip().lower()
-        try:
-            if base_type == "application/json":
+        
+        if base_type == "application/json":
+            try:
                 return json.loads(body.decode("utf-8"))
-            elif base_type == "application/x-www-form-urlencoded":
+            except Exception:
+                return body  # Si falla el parseo de JSON, devuelve los bytes
+                
+        elif base_type == "application/x-www-form-urlencoded":
+            try:
                 raw = parse_qs(body.decode("utf-8"))
                 return {k: v[0] if len(v) == 1 else v for k, v in raw.items()}
-        except Exception:
-            return None
-        return None
+            except Exception:
+                return body
+
+        # Para application/octet-stream o cualquier otro tipo binario/desconocido
+        return body

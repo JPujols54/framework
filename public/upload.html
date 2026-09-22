@@ -60,40 +60,29 @@
             const file = fileInput.files[0];
             uploadBtn.disabled = true;
             statusDiv.style.color = "black";
-            statusDiv.innerText = "Leyendo y enviando archivo...";
+            statusDiv.innerText = "Enviando archivo...";
 
             try {
-                // Convertir el archivo a Base64
-                const base64Data = await new Promise((resolve, reject) => {
-                    const reader = new FileReader();
-                    reader.onload = () => resolve(reader.result.split(',')[1]);
-                    reader.onerror = error => reject(error);
-                    reader.readAsDataURL(file);
-                });
+                // Lee el archivo directamente en formato binario (ArrayBuffer)
+                const fileData = await file.arrayBuffer();
 
-                const payload = {
-                    filename: file.name,
-                    mimeType: file.type,
-                    data: base64Data
-                };
-
-                // Petición POST al endpoint del servidor
+                // Petición POST enviando los bytes directos en el cuerpo
                 const response = await fetch('/api/v1/files/upload', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/octet-stream'
                     },
-                    body: JSON.stringify(payload)
+                    body: fileData
                 });
 
                 const result = await response.json();
 
                 if (response.ok) {
                     statusDiv.style.color = "green";
-                    statusDiv.innerText = `Éxito: ${result.mensaje} (${result.tamaño_mb} MB)`;
+                    statusDiv.innerText = `Éxito: ${result.message} (${result.bytes_written} bytes guardados)`;
                 } else {
                     statusDiv.style.color = "red";
-                    statusDiv.innerText = `Error (${response.status}): ${result.error || result.mensaje || 'Falló la subida'}`;
+                    statusDiv.innerText = `Error (${response.status}): ${result.message || 'Falló la subida'}`;
                 }
 
             } catch (err) {
