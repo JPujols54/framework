@@ -1,11 +1,11 @@
-from core.server import HTTPServer
-from core.router import Router
+from server.server import HTTPServer
+from server.router import Router
 from core.exception import (
     BadRequestError,
     UnauthorizedError
 )
 from datetime import datetime
-import json
+
 app = Router(static_dir="public")
 
 @app.get("/")
@@ -16,13 +16,21 @@ def home(request):
 def contacto(request):
     return "public/contacto.html"
 
+@app.get("/users/{user_id}")
+def get_user(req, user_id: int, active: bool = True, page: int = 1): 
+    return {
+        "user_id": user_id,
+        "activate": active,
+        "page": page
+    }
+
 @app.get("/usuarios/{id}")
 def obtener_usuario(request):
     user_id = request.params.get("id")
     return {"id": user_id, "nombre": f"Usuario {user_id}", "rol": "Admin"}
 
 @app.get("/productos/{categoria}/{id}")
-def detalle_producto(request):
+def detalle_producto(request,categoria,id):
     categoria = request.params.get("categoria")
     producto_id = request.params.get("id")
     
@@ -58,10 +66,8 @@ def register(request):
 
 @app.post("/api/login")
 def login_handler(request):
-    usuario = request.datos.get("usuario")
-    password = request.datos.get("password")
-
-    print(f"Intento de login: {usuario}, {password}")
+    usuario = request.data.get("usuario")
+    password = request.data.get("password")
 
     try:
         with open("usuarios_logueados.txt", "a", encoding="utf-8") as archivo:
@@ -79,6 +85,15 @@ def login_handler(request):
             "status": "error",
             "mensaje": f"Error al guardar en BD: {str(e)}",
         }
+
+@app.get("/upload")
+def upload_page(request):
+    return "public/upload.html"
+
+# Endpoint que recibe y procesa el archivo enviado
+@app.post("/api/v1/files/upload")
+def upload_large_file(request):
+    data = request.data
 
 if __name__ == "__main__":
     server = HTTPServer(app_handler=app)

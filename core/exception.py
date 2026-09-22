@@ -1,7 +1,5 @@
-from core.http_utils import HTTPResponse
+from server.response import HTTPResponse
 
-
-# 1. Clase Base (solo el Middleware la maneja directamente)
 class HTTPException(Exception):
 
   def __init__(

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subir Archivo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:disabled {
+            background-color: #aaa;
+        }
+        #status {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Subir Archivo al Servidor</h2>
+
+    <div class="form-group">
+        <input type="file" id="fileInput">
+    </div>
+
+    <button id="uploadBtn" onclick="uploadFile()">Enviar Archivo</button>
+
+    <div id="status"></div>
+
+    <script>
+        async function uploadFile() {
+            const fileInput = document.getElementById('fileInput');
+            const statusDiv = document.getElementById('status');
+            const uploadBtn = document.getElementById('uploadBtn');
+
+            if (fileInput.files.length === 0) {
+                statusDiv.style.color = "red";
+                statusDiv.innerText = "Por favor, selecciona un archivo primero.";
+                return;
+            }
+
+            const file = fileInput.files[0];
+            uploadBtn.disabled = true;
+            statusDiv.style.color = "black";
+            statusDiv.innerText = "Leyendo y enviando archivo...";
+
+            try {
+                // Convertir el archivo a Base64
+                const base64Data = await new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onload = () => resolve(reader.result.split(',')[1]);
+                    reader.onerror = error => reject(error);
+                    reader.readAsDataURL(file);
+                });
+
+                const payload = {
+                    filename: file.name,
+                    mimeType: file.type,
+                    data: base64Data
+                };
+
+                // Petición POST al endpoint del servidor
+                const response = await fetch('/api/v1/files/upload', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    statusDiv.style.color = "green";
+                    statusDiv.innerText = `Éxito: ${result.mensaje} (${result.tamaño_mb} MB)`;
+                } else {
+                    statusDiv.style.color = "red";
+                    statusDiv.innerText = `Error (${response.status}): ${result.error || result.mensaje || 'Falló la subida'}`;
+                }
+
+            } catch (err) {
+                statusDiv.style.color = "red";
+                statusDiv.innerText = "Error en la conexión con el servidor.";
+                console.error(err);
+            } finally {
+                uploadBtn.disabled = false;
+            }
+        }
+    </script>
+
+</body>
+</html>
